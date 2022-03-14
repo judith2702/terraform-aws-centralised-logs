@@ -32,7 +32,7 @@ variable "vpc_id" {
 }
 
 variable "subnet_ids" {
-  type = list
+  type = "list"
   description = "List of VPC Subnet IDs for the Elastic Search Service EndPoints will be created."
   default = []
 }
