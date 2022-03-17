@@ -81,16 +81,6 @@ resource "aws_iam_role_policy" "int_lambda_elasticsearch_execution" {
 EOT
 }
 
-# lambda to cleanup at 1am each morning delete old logs data
-module "lambda-es-cleanup" {
-  source       = "neillturner/lambda-es-cleanup/aws"
-  version      = "0.2.0"
-  delete_after = "${var.delete_after}"
-  es_endpoint  = "${module.logs_data_es_cluster.es_endpoint}"
-  schedule     = "cron(0 1 * * ? *)"
-  subnet_ids   = var.subnet_ids
-}
-
 # lambda to load alb logs from S3 to elasticsearch cluster
 module "alb-logs-to-elasticsearch" {
   source        = "neillturner/alb-logs-to-elasticsearch/aws"
